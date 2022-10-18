@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'create_restaurant.apps.CreateRestaurantConfig',
     'delete_restaurant.apps.DeleteRestaurantConfig',
     'read_restaurant.apps.ReadRestaurantConfig',
-    'update_restaurant.apps.UpdateRestaurantConfig'
+    'update_restaurant.apps.UpdateRestaurantConfig',
+    'website_basics.apps.WebsiteBasicsConfig'
 ]
 
 MIDDLEWARE = [

@@ -4,5 +4,5 @@ from .views import create
 
 urlpatterns = [
     path('', add_form, name='add_form'),
-    path('<str:name>/<str:address>/<int:phone>', create, name='submit_form')
+    path('<str:name>/<str:address>/<int:phone>/', create, name='submit_form')
 ]

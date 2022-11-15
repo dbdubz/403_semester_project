@@ -5,7 +5,7 @@ Project repository for our restaurant webapp for 403.
 
 SETUP:
 
-1. In terminal do cd restaurants (if not in         restaurants already)
+1. In terminal do cd restaurants (if not in restaurants already)
 
 2. In terminal, run pip install python-dotenv
 

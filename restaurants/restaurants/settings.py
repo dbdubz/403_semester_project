@@ -41,11 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'create_restaurant.apps.CreateRestaurantConfig',
-    'delete_restaurant.apps.DeleteRestaurantConfig',
-    'read_restaurant.apps.ReadRestaurantConfig',
-    'update_restaurant.apps.UpdateRestaurantConfig',
-    'website_basics.apps.WebsiteBasicsConfig'
+    'crud_restaurants.apps.CrudRestaurantsConfig',
 ]
 
 MIDDLEWARE = [

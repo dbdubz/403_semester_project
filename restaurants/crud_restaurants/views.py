@@ -26,5 +26,3 @@ def landing_page(req):
     return render(req, 'restaurants/index.html')
 def about_page(req):
     return render(req, 'restaurants/about.html')
-def base(req):
-    return render(req, 'base.html')

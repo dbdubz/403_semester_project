@@ -66,6 +66,7 @@ class Restaurant(models.Model):
     restaurant_city = models.ForeignKey(City, null=True, on_delete=models.DO_NOTHING)
     restaurant_state = models.ForeignKey(State, null=True, on_delete=models.DO_NOTHING)
     restaurant_zip = models.CharField(max_length=5)
+    restaurant_image = models.ImageField(null=True)
     def __str__(self):
         return (self.restaurant_info)
     

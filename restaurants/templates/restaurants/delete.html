@@ -3,6 +3,9 @@
 {% block pageTitle %}
 <title>Delete Restaurant (FORM)</title>
 {% endblock %}
+{% block pageCSS %}
+<link href="{% static 'css/edit.css' %}" rel="stylesheet">
+{% endblock%}
 {% block navigation %}
 <!--Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,8 +42,34 @@
 </header>
 <!-- Form section with action= url 'restaurant_delete' -->
 <section class="py-5 border-bottom" id="features">
-    <form name="delete_restaurant" method="post">
-        <p><center>Insert form here to get the info for the restaurant to be deleted</center></p>
-    </form>
+    <center>
+        <form name="delete_restaurant" method="post">
+            <p><center>Form to get the info for the restaurant to be deleted</center></p>
+            <div>
+                <label for="restaurant_state">State*</label><br>
+                <select name="restaurant_state" id="restaurant_state" onchange="Curr_State(this)" required>
+                    <option value="" disabled selected hidden>Select a state</option>
+                    <option value="UT">UT - Utah</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="restaurant_city">City*</label><br>
+                <select type="text" name="restaurant_city" id="restaurant_city" onchange="Curr_State(this)" required>
+                    <option disabled selected hidden>Select a city</option>
+                    <option value="Provo">Provo</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="restaurants">Restaurant*</label><br>
+                <select type="dropdown" name="restaurants" id="restaurants">
+                    <option disabled selected hidden>Select the restaurant</option>
+                </select>
+            </div>
+            <br>
+            <button style="background-color: black; color: white;" id="delete_submit" name="delete_submit" type="submit">Submit</button>
+        </form>
+    </center>
 </section>
 {% endblock %}

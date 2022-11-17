@@ -39,8 +39,44 @@
     </header>
 <!-- Form section with action= url 'restaurant_update' -->
     <section class="py-5 border-bottom" id="features">
-        <form name="update_restaurant" method="post">
-            <p><center>Insert form here to get info about the updates and restaurant to be updated</center></p>
-        </form>
+        <center>
+            <form name="update_restaurant" method="post">
+                <p><center>Form to get info about the updates and restaurant to be updated</center></p>
+                <div>
+                    <label for="restaurant_state">State*</label><br>
+                    <select name="restaurant_state" id="restaurant_state" onchange="Curr_State(this)" required>
+                        <option value="" disabled selected hidden>Select a state</option>
+                        <option value="UT">UT - Utah</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label for="restaurant_city">City*</label><br>
+                    <select type="text" name="restaurant_city" id="restaurant_city" onchange="Curr_State(this)" required>
+                        <option disabled selected hidden>Select a city</option>
+                        <option value="Provo">Provo</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label for="restaurants">Restaurant*</label><br>
+                    <select type="dropdown" name="restaurants" id="restaurants">
+                        <option disabled selected hidden>Select the restaurant</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label for="to_update">What do you want to update?*</label><br>
+                    <select type="dropdown" name="to_update" id="to_update">
+                        <option disabled selected hidden>What to update</option>
+                        <option "restaurant_name">Restaurant Name</option>
+                        <option "restaurant_street">Street Address</option>
+                        <option "restaurant_image">Add an image</option>
+                    </select>
+                </div>
+                <br>
+                <button style="background-color: black; color: white;" id="delete_submit" name="delete_submit" type="submit">Submit</button>
+            </form>
+        <center>
     </section>
 {% endblock %}

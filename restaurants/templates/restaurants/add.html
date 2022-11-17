@@ -3,6 +3,9 @@
 {% block pageTitle %}
     <title>Add Restaurant (FORM)</title>
 {% endblock %}
+{% block pageCSS %}
+<link href="{% static 'css/edit.css' %}" rel="stylesheet">
+{% endblock%}
 {% block navigation %}
 <!--Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,8 +42,50 @@
     </header>
     <!-- Form section with action= url 'restaurant_add' -->
     <section class="py-5 border-bottom" id="features">
-        <form name="add_restaurant" method="post">
-            <p><center>Insert form here for info about restaurant to be added</center></p>
-        </form>
+        <center>
+            <form name="add_restaurant" method="post">
+                <p><center>Ugly Skeleton for form for info about restaurant to be added</center></p>
+                <div>
+                    <label for="restaurant_name">Name*</label><br>
+                    <input type="text" name="restaurant_name" id="restaurant_name" required>
+                </div>
+                <br>
+                <div>
+                    <label for="restaurant_street">Street Address*</label><br>
+                    <input type="text" name="restaurant_street" id="restaurant_street" required>
+                </div>
+                <br>
+                <div>
+                    <label for="restaurant_city">City*</label><br>
+                    <input type="text" name="restaurant_city" id="restaurant_city" required>
+                </div>
+                <br>
+                <div>
+                    <label for="restaurant_state">State*</label><br>
+                    <select name="restaurant_state" id="restaurant_state" required>
+                        <option value="" disabled selected hidden>Select a state</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label for="restaurant_zip">Zip Code*</label><br>
+                    <input type="number" name="restaurant_zip" id="restaurant_zip" oninput="Check_Zip(this)" required>
+                </div>
+                <br>
+                <div>
+                    <label for="restaurant_image">Image</label><br>
+                    <input type="file" name="restaurant_image" id="restaurant_image" accept="image/*">
+                </div>
+                <br>
+                <button style="background-color: black; color: white;" id="add_submit" name="add_submit" type="submit">Submit</button>
+            </form>
+        <center>
     </section>
+    <script>
+        function Check_Zip(that) {
+            if (that.value.length > 5) {
+                that.value = that.value.slice(0,5)
+            }
+        }
+    </script>
 {% endblock %}

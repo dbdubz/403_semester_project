@@ -39,6 +39,27 @@
 </header>
 <!-- Features section-->
 <section class="py-5 border-bottom" id="features">
+    <center>
+        <form name="restaurant_preferences" method="post">
+            <div>
+                <label for="restaurant_type">Restaurant type</label><br>
+                <select name="restaurant_type" id="restaurant_type">
+                    <option disabled selected hidden>Select a type</option>
+                    <option value="Mexican">Mexican</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="restaurant_style">Restaurant style</label><br>
+                <select type="text" name="restaurant_style" id="restaurant_style">
+                    <option disabled selected hidden>Select a style</option>
+                    <option value="Fast Food">Fast Food</option>
+                    <option value="Sit-Down">Sit-Down</option>
+                </select>
+            </div>
+        </form>
+    </center>
+    <br>
     <p><center>Insert query results here</center></p>
 </section>
 {% endblock %}

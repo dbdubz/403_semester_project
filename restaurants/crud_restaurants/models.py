@@ -26,7 +26,7 @@ class ZipCode(models.Model):
 class City(models.Model):
     city_name = models.CharField(max_length=30)
     city_state = models.ForeignKey(State, null=True, on_delete=models.DO_NOTHING)
-    city_zip = models.CharField(max_length=5)
+    #city_zip = models.CharField(max_length=5)
 
     def __str__(self):
         return (self.city_info)

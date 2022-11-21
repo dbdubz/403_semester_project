@@ -3,6 +3,9 @@
 {% block pageTitle %}
 <title>Restaurants</title>
 {% endblock %}
+{% block pageCSS %}
+<link href="{% static 'css/edit.css' %}" rel="stylesheet">
+{% endblock%}
 {% block navigation %}
 <!--Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -40,26 +43,54 @@
 <!-- Features section-->
 <section class="py-5 border-bottom" id="features">
     <center>
-        <form name="restaurant_preferences" method="post">
+        <form name="restaurant_preferences" method="get" action="{% url 'all_restaurants' %}">
             <div>
-                <label for="restaurant_type">Restaurant type</label><br>
-                <select name="restaurant_type" id="restaurant_type">
-                    <option disabled selected hidden>Select a type</option>
-                    <option value="Mexican">Mexican</option>
+                <label class="fw-bolder" for="restaurant_type_style">Available Restaurant Type and Style</label><br>
+                <select type="text" name="restaurant_type_style" id="restaurant_type_style">
+                    <option value="all" selected>All restaurants</option>
+                    {% for t in type_styles %}
+                    <option value="{{t.id}}">{{t.restaurant_style}} - {{t.restaurant_type}}</option>
+                    {% endfor %}
                 </select>
             </div>
             <br>
-            <div>
-                <label for="restaurant_style">Restaurant style</label><br>
-                <select type="text" name="restaurant_style" id="restaurant_style">
-                    <option disabled selected hidden>Select a style</option>
-                    <option value="Fast Food">Fast Food</option>
-                    <option value="Sit-Down">Sit-Down</option>
-                </select>
-            </div>
+            <button style="background-color: black; color: white;" type="submit">Submit</button>
         </form>
+        <br><hr><br>
+        {% for ts in selected %}
+        <h3>Showing results for <span style="text-decoration: underline">{{ts}}</span> restaurants...</h3>
+        {% endfor %}
+        <br>
+        <table>
+            <tbody>
+            {% for r in restaurants%}
+                <tr>
+                    <td style="padding-right: 10px"><h5>{{r.restaurant_name}} - {{r.restaurant_street}}</h5></td>
+                    <td>
+                        <form name="delete_individual" method="get" action="{% url 'edit_form' %}">
+                            <input type="number" name="rest_id" value="{{r.id}}" hidden>
+                            {% for ts in selected %}
+                            <input type="number" name="restaurant_type_style" value="{{ts.id}}" hidden>
+                            {% endfor %}
+                            <input type="text" name="to_do" value="edit" hidden>
+                            <button style="background-color: black; color: white; width: 60px;" type="submit">Edit</button>
+                        </form>
+                    </td>                    
+                    <td>
+                        <form name="delete_individual" method="post" action="{% url 'all_restaurants' %}">
+                            {% csrf_token %}
+                            <input type="number" name="rest_id" value="{{r.id}}" hidden>
+                            {% for ts in selected %}
+                            <input type="number" name="restaurant_type_style" value="{{ts.id}}" hidden>
+                            {% endfor %}
+                            <input type="text" name="to_do" value="delete" hidden>
+                            <button style="background-color: black; color: white; width: 60px;" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </center>
-    <br>
-    <p><center>Insert query results here</center></p>
 </section>
 {% endblock %}

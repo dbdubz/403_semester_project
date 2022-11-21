@@ -26,50 +26,83 @@
     </nav>
 {% endblock %}
 {% block content %}
-<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-5">
-        <div class="row gx-5 justify-content-center">
-            <div class="col-lg-6">
-                <div class="text-center my-5">
-                    <h1 class="display-5 fw-bolder text-white mb-2">Delete a Restaurant</h1>
-                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+    <!-- Header-->
+    <header class="bg-dark py-5">
+        <div class="container px-5">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center my-5">
+                        <h1 class="display-5 fw-bolder text-white mb-2">Delete a Restaurant</h1>
+                        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
-<!-- Form section with action= url 'restaurant_delete' -->
-<section class="py-5 border-bottom" id="features">
-    <center>
-        <form name="delete_restaurant" method="post">
-            <p><center>Form to get the info for the restaurant to be deleted</center></p>
-            <div>
-                <label for="restaurant_state">State*</label><br>
-                <select name="restaurant_state" id="restaurant_state" onchange="Curr_State(this)" required>
-                    <option value="" disabled selected hidden>Select a state</option>
-                    <option value="UT">UT - Utah</option>
-                </select>
-            </div>
-            <br>
-            <div>
-                <label for="restaurant_city">City*</label><br>
-                <select type="text" name="restaurant_city" id="restaurant_city" onchange="Curr_State(this)" required>
-                    <option disabled selected hidden>Select a city</option>
-                    <option value="Provo">Provo</option>
-                </select>
-            </div>
-            <br>
-            <div>
-                <label for="restaurants">Restaurant*</label><br>
-                <select type="dropdown" name="restaurants" id="restaurants">
-                    <option disabled selected hidden>Select the restaurant</option>
-                </select>
-            </div>
-            <br>
-            <button style="background-color: black; color: white;" id="delete_submit" name="delete_submit" type="submit">Submit</button>
-        </form>
-    </center>
-</section>
+    </header>
+    <!-- Form section with action= url 'restaurant_delete' -->
+    <section class="py-5 border-bottom" id="features">
+        <center>
+            <form name="delete_form" method="post" action="{% url 'delete_form' %}">
+                {% csrf_token %}
+                <div>
+                    <div id="delete_select">
+                        <div>
+                            <h3 class="fw-bolder">What do you want to delete?</h3><br>
+                            <select type="dropdown" name="to_delete" id="to_delete" onchange="Set_Selection(this)">
+                                <option value="" disabled selected hidden>What to delete</option>
+                                <option value="all">Restaurant Chain</option>
+                                <option value="individual">Individual Restaurant</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <h5 id="delete_selection"></h5>
+                <div>
+                    <div id="del_all" class="d-none">
+                        <label class="fw-bolder" for="rest_name">Restaurant Name (Required)</label><br>
+                        <select name="rest_name" id="rest_name" onchange="Set_Restaurant()">
+                            <option value="" disabled selected hidden>Select the restaurant</option>
+                            {% for dr in distinct_restaurants %}
+                            <option value="{{dr.restaurant_name}}">{{dr.restaurant_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div id="del_one" class="d-none">
+                        <label class="fw-bolder" for="rest_id">Restaurant Name (Required)</label><br>
+                        <select name="rest_id" id="rest_id" onchange="Set_Restaurant()">
+                            <option value="" disabled selected hidden>Select the restaurant</option>
+                            {% for r in restaurants %}
+                            <option value="{{r.id}}">{{r.restaurant_name}} - {{r.restaurant_street}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <button style="background-color: black; color: white;" class="d-none" id="del_submit" name="del_submit" type="submit">Submit</button>
+            </form>
+        </center>
+    </section>
+    <script>
+        function Set_Selection(that) { 
+            var selected = that.value 
+            
+            document.getElementById("del_submit").classList.remove("d-none")
+
+            if (selected == "all") {
+                document.getElementById("delete_selection").innerHTML = "Tell us which restaurant chain from our collection to delete..."
+                document.getElementById("del_all").classList.remove("d-none")
+                document.getElementById("del_one").classList.add("d-none")
+                document.getElementById("rest_name").setAttribute("required", '')
+                document.getElementById("rest_id").removeAttribute("required")
+            } else if (selected == "individual") {
+                document.getElementById("delete_selection").innerHTML = "Tell us which single restaurant from our collection to delete..."
+                document.getElementById("del_all").classList.add("d-none")
+                document.getElementById("del_one").classList.remove("d-none")
+                document.getElementById("rest_id").setAttribute("required", '')
+                document.getElementById("rest_name").removeAttribute("required")
+            }
+        }
+    </script>
 {% endblock %}

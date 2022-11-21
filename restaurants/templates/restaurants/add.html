@@ -43,49 +43,37 @@
     <!-- Form section with action= url 'restaurant_add' -->
     <section class="py-5 border-bottom" id="features">
         <center>
-            <form name="add_restaurant" method="post">
-                <p><center>Ugly Skeleton for form for info about restaurant to be added</center></p>
+            <form name="add_restaurant" method="post" action="{% url 'add_form' %}">
+                {% csrf_token %}
                 <div>
-                    <label for="restaurant_name">Name*</label><br>
-                    <input type="text" name="restaurant_name" id="restaurant_name" required>
-                </div>
-                <br>
-                <div>
-                    <label for="restaurant_street">Street Address*</label><br>
-                    <input type="text" name="restaurant_street" id="restaurant_street" required>
-                </div>
-                <br>
-                <div>
-                    <label for="restaurant_city">City*</label><br>
-                    <input type="text" name="restaurant_city" id="restaurant_city" required>
-                </div>
-                <br>
-                <div>
-                    <label for="restaurant_state">State*</label><br>
-                    <select name="restaurant_state" id="restaurant_state" required>
-                        <option value="" disabled selected hidden>Select a state</option>
+                    <label class="fw-bolder" for="restaurant_style">Restaurant Type (required)</label><br>
+                    <select name="restaurant_style" id="restaurant_style" required>
+                        <option value="" disabled selected hidden>Select a food type</option>
+                        {% for n in styles%}
+                        <option value="{{n.id}}">{{n.restaurant_style}} - {{n.restaurant_type}}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <br>
                 <div>
-                    <label for="restaurant_zip">Zip Code*</label><br>
-                    <input type="number" name="restaurant_zip" id="restaurant_zip" oninput="Check_Zip(this)" required>
+                    <label class="fw-bolder" for="restaurant_name">Name (required)</label><br>
+                    <input type="text" name="restaurant_name" id="restaurant_name" required>
                 </div>
                 <br>
                 <div>
-                    <label for="restaurant_image">Image</label><br>
-                    <input type="file" name="restaurant_image" id="restaurant_image" accept="image/*">
+                    <label class="fw-bolder" for="restaurant_street">Street Address (required)</label><br>
+                    <input type="text" name="restaurant_street" id="restaurant_street" required>
                 </div>
                 <br>
                 <button style="background-color: black; color: white;" id="add_submit" name="add_submit" type="submit">Submit</button>
             </form>
         <center>
     </section>
+{% endblock %}
     <script>
         function Check_Zip(that) {
             if (that.value.length > 5) {
-                that.value = that.value.slice(0,5)
+                that.value = that.value.slice(0,5);
             }
-        }
+        };
     </script>
-{% endblock %}

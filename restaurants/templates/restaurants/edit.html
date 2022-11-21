@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'all_restaurants' %}">Restaurant</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'all_restaurants' %}">restaurant</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'add_form' %}">Add</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'update_form' %}">Edit</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'delete_form' %}">Delete</a></li>
@@ -43,12 +43,12 @@
 <!-- Form section with action= url 'restaurant_update' -->
     <section class="py-5 border-bottom" id="features">
         <center>
-            <form name="update_form" id="update_form" method="post" action="{% url 'update_form' %}">    
+            <form name="update_form" id="update_form" method="post" action="{% url 'edit_form' %}">    
                 {% csrf_token %}
                 <div>
                     <div id="update_select">
                         <div>
-                            <h3 class="fw-bolder" name="heading">What do you want to update?</h3><br>
+                            <h3 class="fw-bolder" name="heading">What do you want to update for {{restaurant.restaurant_name}}?</h3><br>
                             <select type="dropdown" name="to_update" id="to_update" onchange="Set_Selection(this)">
                                 <option value="" disabled selected hidden>What to update</option>
                                 <option value="update_restaurant_name">Restaurant Name</option>
@@ -60,16 +60,7 @@
                 <br><br>
                 <h5 id="selection"></h5>
                 <div id="basic_info" class="d-none">
-                    <div>
-                        <label class="fw-bolder" for="restaurant">Restaurant (Required)</label><br>
-                        <select name="rest_id" id="rest_id" onchange="Set_Restaurant()" required>
-                            <option value="" disabled selected hidden>Select the restaurant</option>
-                            {% for r in restaurants %}
-                            <option value="{{r.id}}">{{r.restaurant_name}} - {{r.restaurant_street}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <br>    
+                    <input name='rest_id' id='rest_id' value="{{restaurant.id}}" hidden>
                     <div class="d-none" id="update_name" name="update_name">
                         <div id="name">
                             <label class="fw-bolder" for="restaurant_name">New Restaurant Name (Required)</label><br>

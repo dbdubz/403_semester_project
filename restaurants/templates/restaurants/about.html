@@ -3,6 +3,9 @@
 {% block pageTitle %}
 <title>About This Website</title>
 {% endblock %}
+{% block pageCSS %}
+<link href="{% static 'css/edit.css' %}" rel="stylesheet">
+{% endblock%}
 {% block navigation %}
 <!--Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,6 +42,13 @@
     </header>
 <!-- Features section-->
     <section class="py-5 border-bottom" id="features">
-        <p><center>Insert team info/site purpose here</center></p>
+        <center>
+            <p style="font-weight: bold;">This is our IS 403 semester project.</p>
+            <p style="font-weight: bold;">Our Group (3-14)</p>
+            <p>Chase Rindlisbacher</p>
+            <p>Dalyn Baldwin</p>
+            <p>Jeremy Fairbanks</p>
+            <p>Ty Bingham</p>
+        </center>
     </section>
 {% endblock %}

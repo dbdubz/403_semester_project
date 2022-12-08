@@ -33,7 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://403semesterproject-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://provorestaurants.up.railway.app']
 
 
 # Application definition

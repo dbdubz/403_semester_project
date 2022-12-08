@@ -27,7 +27,6 @@ def delete_form(req):
             restaurant = Restaurant.objects.filter(restaurant_name=req.POST.get('rest_name'))
             
         restaurant.delete()
-    
 
     distinct_restaurants = Restaurant.objects.distinct('restaurant_name')
     restaurants = Restaurant.objects.all()
